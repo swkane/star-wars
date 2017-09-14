@@ -2,20 +2,29 @@ import React, {Component} from 'react';
 import '../styles/App.css';
 import Jumbotron from './Jumbotron.js';
 import Form from './Form.js';
+import Vehicle from './Vehicles'
 
 class App extends Component {
   // PROPS AND STATE
   // Set props and state below.
   // You should set state for vehicles (empty array), value (empty string), pilot (empty) string.
   // Enter your code below:
-
+    state = {
+      vehicles: [],
+      value: '',
+      pilot: ''
+    }
 
 
   // FORM: HANDLE INPUT CHANGES
   // handleNameChange below:
   // See form lesson for details.
   // Enter your code below:
-
+  handleNameChange = (event) => {
+    this.setState({
+      value: event.target.value
+    })
+  }
 
 
   //  FORM: SUBMIT METHOD
@@ -24,7 +33,15 @@ class App extends Component {
   // Once the form is sumbited, two things need to happen: set the state of pilot to the input value.
   // Then, set the value of the input back to an empty string.
   // Enter your code below:
+handleFormSubmit = (event) => {
+  event.preventDefault();
+  this.setState({
+    pilot: this.state.value,
+    value: ''
+  })
 
+  // console.log('We submitted the form');
+}
 
   // LIFECYCLE
   // Which lifecycle is best for fetching data?
@@ -34,7 +51,12 @@ class App extends Component {
   // You will want to use this array when you set the state of 'vehicles'. You will need this data in your render.
   // Enter your code below:
 
-
+  componentDidMount() {
+    fetch('https://swapi.co/api/vehicles/')
+      .then(r => r.json())
+      .then(({results}) =>
+        this.setState({vehicles: results}));
+  }
   // RENDER
   // Before you can map over the data you've fetched, you will first need to store that 'state' in a variable.
   // Map over the data.
@@ -44,10 +66,13 @@ class App extends Component {
   // Enter your code below:
 
   render() {
+    console.log(this.state.vehicles);
     return (
       <div className="App">
         <Jumbotron />
-        <Form />
+        <Form handleFormSubmit={this.handleFormSubmit} handleNameChange={this.handleNameChange} pilot={this.state.pilot} value={this.state.value} />
+        {this.state.vehicles.map((vehicle) => <Vehicle key={vehicle.url} {...vehicle} /> )}
+
         {/*
         The App component needs the following:
          jumbotron section, form section, vehicle cards section.

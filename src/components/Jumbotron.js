@@ -9,7 +9,7 @@ export default class Jumbo extends Component {
         <Jumbotron>
           <h1 className="display-3"> Star Wars</h1>
           <hr className="my-2" />
-          <p>The Vehicles of Start Wars</p>
+          <p>The Vehicles of Star Wars</p>
         </Jumbotron>
       </div>
     );

@@ -8,10 +8,11 @@ export default class Form extends React.Component {
         <div className="container">
           <Jumbotron>
             <h4>What is your name pilot?</h4>
-            <form>
-              <Input placeholder="Enter your name here" />
+            <form onSubmit={this.props.handleFormSubmit}>
+              <Input onChange={this.props.handleNameChange} value={this.props.value} placeholder="Enter your name here" />
               <Button color="primary" type="submit">Submit</Button>
             </form>
+            <p>{this.props.pilot}</p>
           </Jumbotron>
         </div>
       </div>

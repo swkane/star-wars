@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../styles/App.css';
 import Jumbotron from './Jumbotron.js';
 import Form from './Form.js';
-import Vehicle from './Vehicles'
+import Vehicle from './Vehicles';
 
 class App extends Component {
   // PROPS AND STATE
